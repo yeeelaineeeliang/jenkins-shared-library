@@ -6,7 +6,7 @@ def call(Map config = [:]) {
     sh '''
         echo "Node version: $(node --version)"
         echo "NPM version: $(npm --version)"
-        npm ci
+        npm install
         npm run lint --if-present
         echo "Build stage complete"
     '''
