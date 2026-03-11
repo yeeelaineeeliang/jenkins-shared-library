@@ -9,6 +9,6 @@ def call(Map config) {
             kubectl apply -f - -n ${namespace} --context=ecommerce-${environment}
         kubectl apply -f k8s/${environment}/ -n ${namespace} --context=ecommerce-${environment}
         kubectl rollout status deployment/${service} -n ${namespace} \
-            --context=ecommerce-${environment} --timeout=120s
+            --context=ecommerce-${environment} --timeout=300s
     """
 }
