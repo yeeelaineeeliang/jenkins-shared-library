@@ -30,6 +30,7 @@ def call(Map config = [:]) {
             echo "Found terraform/ directory"
             ls -la terraform/
             checkov -d terraform \
+                --recursive \
                 --quiet \
                 --compact \
                 --output cli \
