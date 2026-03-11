@@ -27,16 +27,19 @@ def call(Map config = [:]) {
     echo "Running Checkov IaC scan on terraform/ directory"
     sh """
         if [ -d "terraform" ]; then
+            echo "Found terraform/ directory"
+            ls -la terraform/
             checkov -d terraform \
                 --quiet \
                 --compact \
                 --output cli \
                 --soft-fail 2>&1 | tee checkov-report-${service}.txt || true
-
             echo "Checkov Scan Summary"
             cat checkov-report-${service}.txt
         else
             echo "No terraform/ directory found — skipping Checkov scan"
+            echo "Current directory contents:"
+            ls -la
         fi
     """
     archiveArtifacts artifacts: "checkov-report-${service}.txt", allowEmptyArchive: true
