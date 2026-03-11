@@ -31,8 +31,7 @@ def call(Map config = [:]) {
                 --quiet \
                 --compact \
                 --output cli \
-                --output-file checkov-report-${service}.txt \
-                --soft-fail || true
+                --soft-fail 2>&1 | tee checkov-report-${service}.txt || true
 
             echo "Checkov Scan Summary"
             cat checkov-report-${service}.txt
